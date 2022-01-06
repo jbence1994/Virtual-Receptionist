@@ -1,0 +1,43 @@
+{
+  "bookings": [
+    {
+      "id": 1,
+      "guest": {
+        "id": 1,
+        "firstName": "Joseph Robinette",
+        "lastName": "Biden",
+        "documentId": "4b4e2d9f-8184-4fbe-ba9d-2dbb5786a894",
+        "country": {
+          "id": 4,
+          "name": "Amerikai Egyesült Államok"
+        },
+        "birthDate": "1946. 06. 14.",
+        "zipCode": "20500",
+        "city": "Washington, DC.",
+        "address": "1600 Pennsylvania Ave NW",
+        "email": "potus@gmail.com",
+        "phone": "+555 356 864"
+      },
+      "room": {
+        "id": 12,
+        "number": 14,
+        "name": "Emeleti franciaágyas",
+        "billingItem": {
+          "id": 2,
+          "name": "1 szoba 2 főre",
+          "price": 11400,
+          "billingCategory": {
+            "id": 1,
+            "name": "Szállás",
+            "vat": 18,
+            "unit": "éjszaka"
+          }
+        }
+      },
+      "numberOfGuests": 2,
+      "arrivalDate": "2021. 12. 31.",
+      "departureDate": "2022. 01. 01.",
+      "isPaid": false
+    }
+  ]
+}

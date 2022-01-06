@@ -221,5 +221,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repositories\MockData\accommodation.json" />
+    <Content Include="Repositories\MockData\billingItems.json" />
+    <Content Include="Repositories\MockData\bookings.json" />
+    <Content Include="Repositories\MockData\countries.json" />
+    <Content Include="Repositories\MockData\guests.json" />
+    <Content Include="Repositories\MockData\rooms.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
