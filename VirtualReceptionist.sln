@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualReceptionist.Desktop", "VirtualReceptionist.Desktop\VirtualReceptionist.Desktop.csproj", "{D54A9DE4-6149-4E21-983A-102FFAB65D6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualReceptionist.Tests", "VirtualReceptionist.Tests\VirtualReceptionist.Tests.csproj", "{646EE5DD-18D7-435A-B46E-AAD2C472189F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D54A9DE4-6149-4E21-983A-102FFAB65D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54A9DE4-6149-4E21-983A-102FFAB65D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54A9DE4-6149-4E21-983A-102FFAB65D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54A9DE4-6149-4E21-983A-102FFAB65D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{646EE5DD-18D7-435A-B46E-AAD2C472189F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{646EE5DD-18D7-435A-B46E-AAD2C472189F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{646EE5DD-18D7-435A-B46E-AAD2C472189F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{646EE5DD-18D7-435A-B46E-AAD2C472189F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
