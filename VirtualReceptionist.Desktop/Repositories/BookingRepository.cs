@@ -1,8 +1,8 @@
-﻿using virtual_receptionist.Repositories.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Data;
 using virtual_receptionist.Repositories.DAO;
+using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Repositories
 {

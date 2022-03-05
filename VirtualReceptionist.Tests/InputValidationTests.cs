@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using virtual_receptionist.Controllers.Validation;
 using virtual_receptionist.Controllers.Exceptions;
-using virtual_receptionist.Repositories.Models;
 using System.Collections.Generic;
+using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionistTests.InputValidation
 {

@@ -1,4 +1,4 @@
-﻿namespace virtual_receptionist.Repositories.Models
+﻿namespace VirtualReceptionist.Desktop.Models
 {
     /// <summary>
     /// Számlázási tételek kateógria egyed
