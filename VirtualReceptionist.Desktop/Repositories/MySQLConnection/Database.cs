@@ -78,14 +78,14 @@ namespace virtual_receptionist.Repositories.MySQLConnection
             {
                 mySqlConnection = new MySqlConnection()
                 {
-                    ConnectionString = ConfigurationManager.ConnectionStrings["local"].ConnectionString
+                    ConnectionString = "SERVER=127.0.0.1; DATABASE=virtual_receptionist; UID=root; PASSWORD=mySQLserver!12345; PORT=3306; SslMode=None;"
                 };
             }
             else if (connectionType == "iskolai")
             {
                 mySqlConnection = new MySqlConnection()
                 {
-                    ConnectionString = ConfigurationManager.ConnectionStrings["remote"].ConnectionString
+                    ConnectionString = "SERVER=10.0.128.111; DATABASE=zarodolgozat_2018szjuhben; UID=zarodolgozat; PASSWORD=zarodolgozat; PORT=3306; SslMode=None;"
                 };
             }
             else
