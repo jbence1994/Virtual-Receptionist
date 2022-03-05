@@ -38,7 +38,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         private List<Country> UploadCountriesList()
         {
             string sql = "SELECT * FROM country";
-            DataTable dt = database.DQL(sql);
+            DataTable dt = database.Dql(sql);
 
             foreach (DataRow row in dt.Rows)
             {

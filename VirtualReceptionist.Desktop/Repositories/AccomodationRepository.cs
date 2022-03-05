@@ -19,7 +19,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             string sql =
                 "SELECT accomodation.ID, accomodation.AccomodationName, accomodation.CompanyName, accomodation.Contact, accomodation.VATNumber, accomodation.Headquarters, accomodation.Site, accomodation.PhoneNumber, accomodation.EmailAddress, accomodation_profile.AccomodationID, accomodation_profile.Password FROM accomodation, accomodation_profile WHERE accomodation.ID = accomodation_profile.Accomodation";
-            DataTable dt = database.DQL(sql);
+            DataTable dt = database.Dql(sql);
 
             foreach (DataRow row in dt.Rows)
             {
@@ -77,7 +77,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             try
             {
-                database.SetConnection(connectionType);
+                database.SetConnection();
 
                 Accommodation accomodation = GetAccomodation();
 

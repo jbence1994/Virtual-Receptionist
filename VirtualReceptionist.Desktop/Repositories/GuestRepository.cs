@@ -46,7 +46,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             string sql =
                 "SELECT guest.ID, guest.Name, guest.DocumentNumber, guest.Citizenship, guest.BirthDate, country.CountryName, guest.ZipCode, guest.City, guest.Address, guest.PhoneNumber, guest.EmailAddress FROM guest, country WHERE guest.Country = country.ID";
-            DataTable dt = database.DQL(sql);
+            DataTable dt = database.Dql(sql);
 
             foreach (DataRow row in dt.Rows)
             {
@@ -97,7 +97,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         public void Delete(Guest guest)
         {
             string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.Id}\"";
-            database.DML(sql);
+            database.Dml(sql);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             string sql =
                 $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.Id}\"";
-            database.DML(sql);
+            database.Dml(sql);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             string sql =
                 $"INSERT INTO guest(Name, DocumentNumber, Citizenship, BirthDate, Country, ZipCode, City, Address, PhoneNumber, EmailAddress) VALUES(\"{guest.Name}\", \"{guest.DocumentNumber}\", \"{guest.Citizenship}\", \"{guest.BirthDate}\", (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), \"{guest.ZipCode}\", \"{guest.City}\", \"{guest.Address}\", \"{guest.PhoneNumber}\", \"{guest.EmailAddress}\")";
-            database.DML(sql);
+            database.Dml(sql);
         }
 
         #endregion
@@ -133,7 +133,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         public int GetNextGuestID()
         {
             string sql = "SELECT MAX(guest.ID) FROM guest";
-            string maxID = database.ScalarDQL(sql);
+            string maxID = database.ScalarDql(sql);
 
             int.TryParse(maxID, out int nextID);
 

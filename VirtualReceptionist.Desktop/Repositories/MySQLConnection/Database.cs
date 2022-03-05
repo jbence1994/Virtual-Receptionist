@@ -1,257 +1,115 @@
-﻿using System;
-using System.Data;
-using System.Diagnostics;
+﻿using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
 {
-    /// <summary>
-    /// Adatbázis kapcsolódást, adatlekérdezés és adatmanipulációs műveleteket megvalósító egyke osztály
-    /// </summary>
     public sealed class Database
     {
-        #region Adattagok
+        private static Database _databaseInstance;
+        private MySqlConnection _mySqlConnection;
+        private MySqlCommand _mySqlCommand;
+        private MySqlDataAdapter _mySqlDataAdapter;
 
-        /// <summary>
-        /// Ezen osztály egyke példánya
-        /// </summary>
-        private static Database databaseInstance;
-
-        /// <summary>
-        /// Adatbázis kapcsolatot létrehozó mező
-        /// </summary>
-        private MySqlConnection mySqlConnection;
-
-        /// <summary>
-        /// SQL utasítást vágrehajtó mező
-        /// </summary>
-        private MySqlCommand mySqlCommand;
-
-        /// <summary>
-        /// Adatszerkezeteket adattal feltöltő osztály egy példánya
-        /// </summary>
-        private MySqlDataAdapter mySqlDataAdapter;
-
-        /// <summary>
-        /// SQL DML parancsokat végrehajtó osztály egy példánya
-        /// </summary>
-        private MySqlCommandBuilder mySqlCommandBuilder;
-
-        #endregion
-
-        #region Konstruktor
-
-        /// <summary>
-        /// Database osztály konstruktora
-        /// </summary>
         private Database()
         {
         }
 
-        #endregion
-
-        #region Metódusok
-
-        /// <summary>
-        /// Az egyke adatbázis kapcsolódásért felelős osztályt példányosító (getter) metódus
-        /// </summary>
-        /// <returns>Az egyke példánnyal tér vissza a metódus</returns>
         public static Database GetDatabaseInstance()
         {
-            if (databaseInstance == null)
+            if (_databaseInstance == null)
             {
-                return databaseInstance = new Database();
+                return _databaseInstance = new Database();
             }
 
-            return databaseInstance;
+            return _databaseInstance;
         }
 
-        /// <summary>
-        /// Metódus, amely beállítja az adatbázis kapcsolódásának a típusát
-        /// </summary>
-        /// <param name="connectionType">Adatbáziskapcsolódás típusa</param>
-        /// <exception cref="InvalidConnectionTypeException"></exception>
-        public void SetConnection(string connectionType)
+        public void SetConnection()
         {
-            if (connectionType == "otthoni")
+            _mySqlConnection = new MySqlConnection
             {
-                mySqlConnection = new MySqlConnection()
-                {
-                    ConnectionString = "SERVER=127.0.0.1; DATABASE=virtual_receptionist; UID=root; PASSWORD=mySQLserver!12345; PORT=3306; SslMode=None;"
-                };
-            }
-            else if (connectionType == "iskolai")
-            {
-                mySqlConnection = new MySqlConnection()
-                {
-                    ConnectionString = "SERVER=10.0.128.111; DATABASE=zarodolgozat_2018szjuhben; UID=zarodolgozat; PASSWORD=zarodolgozat; PORT=3306; SslMode=None;"
-                };
-            }
-            else
-            {
-                throw new InvalidConnectionTypeException();
-            }
+                ConnectionString =
+                    "SERVER=127.0.0.1; DATABASE=virtual_receptionist; UID=root; PASSWORD=mySQLserver!12345; PORT=3306; SslMode=None;"
+            };
         }
 
-        /// <summary>
-        /// Adatbázis kapcsolatot megnyitó metódus
-        /// </summary>
         private void OpenConnection()
         {
-            try
+            if (_mySqlConnection.State != ConnectionState.Closed)
             {
-                if (mySqlConnection.State == ConnectionState.Closed)
-                {
-                    mySqlConnection.Open();
-                    Debug.WriteLine("Sikeres adatbázis kapcsolódás...");
-                }
+                return;
             }
-            catch (MySqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+            _mySqlConnection.Open();
         }
 
-        /// <summary>
-        /// Adatbázis kapcsolatot lezáró metódus
-        /// </summary>
         private void CloseConnection()
         {
-            try
+            if (_mySqlConnection.State != ConnectionState.Open)
             {
-                if (mySqlConnection.State == ConnectionState.Open)
-                {
-                    mySqlConnection.Close();
-                    Debug.WriteLine("Adatbázis kapcsolat sikeresen lezárult...");
-                }
+                return;
             }
-            catch (MySqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+            _mySqlConnection.Close();
         }
 
-        /// <summary>
-        /// SELECT SQL utasítást végrehajtó metódus
-        /// </summary>
-        /// <param name="query">SQL utasítás</param>
-        /// <returns>Adatokkal feltöltött DataTable adatszerkezettel tér vissza a metódus</returns>
-        public DataTable DQL(string query)
+        public DataTable Dql(string query)
         {
             OpenConnection();
 
-            DataTable dataTable = new DataTable();
+            var dataTable = new DataTable();
 
-            try
+            _mySqlCommand = new MySqlCommand
             {
-                mySqlCommand = new MySqlCommand()
-                {
-                    CommandText = query,
-                    Connection = mySqlConnection
-                };
+                CommandText = query,
+                Connection = _mySqlConnection
+            };
 
-                mySqlDataAdapter = new MySqlDataAdapter()
-                {
-                    SelectCommand = mySqlCommand
-                };
-
-                mySqlCommandBuilder = new MySqlCommandBuilder()
-                {
-                    DataAdapter = mySqlDataAdapter
-                };
-
-                mySqlDataAdapter.Fill(dataTable);
-            }
-            catch (MySqlException e)
+            _mySqlDataAdapter = new MySqlDataAdapter
             {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+                SelectCommand = _mySqlCommand
+            };
+
+            _mySqlDataAdapter.Fill(dataTable);
 
             CloseConnection();
 
             return dataTable;
         }
 
-        /// <summary>
-        /// INSERT, UPDATE, DELETE SQL utasítást végrehajtó metódus
-        /// </summary>
-        /// <param name="query">SQL utasítás</param>
-        public void DML(string query)
+        public void Dml(string query)
         {
             OpenConnection();
 
-            try
+            _mySqlCommand = new MySqlCommand
             {
-                mySqlCommand = new MySqlCommand()
-                {
-                    CommandText = query,
-                    Connection = mySqlConnection
-                };
+                CommandText = query,
+                Connection = _mySqlConnection
+            };
 
-                mySqlCommand.Prepare();
-                mySqlCommand.ExecuteNonQuery();
-            }
-            catch (MySqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            _mySqlCommand.Prepare();
+            _mySqlCommand.ExecuteNonQuery();
 
             CloseConnection();
         }
 
-        /// <summary>
-        /// Aggregált SELECT SQL utasítást végrehajtó metódus
-        /// </summary>
-        /// <param name="query">SQL utasítás</param>
-        /// <returns>SQL utasítás eredményét adja vissza karakterláncban</returns>
-        public string ScalarDQL(string query)
+        public string ScalarDql(string query)
         {
-            string scalarQuery = string.Empty;
-
             OpenConnection();
 
-            try
+            _mySqlCommand = new MySqlCommand
             {
-                mySqlCommand = new MySqlCommand()
-                {
+                CommandText = query,
+                Connection = _mySqlConnection
+            };
 
-                    CommandText = query,
-                    Connection = mySqlConnection
-                };
+            _mySqlCommand.Prepare();
 
-                mySqlCommand.Prepare();
-                scalarQuery = mySqlCommand.ExecuteScalar().ToString();
-            }
-            catch (MySqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            var scalarQuery = _mySqlCommand.ExecuteScalar().ToString();
 
             CloseConnection();
 
             return scalarQuery;
         }
-
-        #endregion
     }
 }
