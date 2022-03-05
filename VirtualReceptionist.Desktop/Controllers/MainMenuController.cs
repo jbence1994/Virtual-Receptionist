@@ -38,7 +38,7 @@ namespace virtual_receptionist.Controllers
         public string SetMainMenuHeader()
         {
             Accomodation accomodation = repository.GetAccomodation();
-            return $"{accomodation.AccomodationName} ({accomodation.VATNumber})";
+            return $"{accomodation.Name} ({accomodation.VatNumber})";
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace virtual_receptionist.Controllers
             Accomodation accomodation = repository.GetAccomodation();
 
             string[] accomodationData = new string[8];
-            accomodationData[0] = accomodation.AccomodationName;
+            accomodationData[0] = accomodation.Name;
             accomodationData[1] = accomodation.CompanyName;
             accomodationData[2] = accomodation.Contact;
-            accomodationData[3] = accomodation.VATNumber;
+            accomodationData[3] = accomodation.VatNumber;
             accomodationData[4] = accomodation.Headquarters;
             accomodationData[5] = accomodation.Site;
             accomodationData[6] = accomodation.PhoneNumber;

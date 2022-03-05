@@ -35,16 +35,16 @@ namespace virtual_receptionist.Repositories
                 string accomodationID = row["AccomodationID"].ToString();
                 string password = row["Password"].ToString();
 
-                Accomodation accomodation = Accomodation.GetAccomodation();
-                accomodation.AccomodationName = name;
+                Accomodation accomodation = Accomodation.GetAccommodation();
+                accomodation.Name = name;
                 accomodation.CompanyName = company;
                 accomodation.Contact = contact;
-                accomodation.VATNumber = vatNumber;
+                accomodation.VatNumber = vatNumber;
                 accomodation.Headquarters = headquarters;
                 accomodation.Site = site;
                 accomodation.PhoneNumber = phoneNumber;
                 accomodation.EmailAddress = email;
-                accomodation.AccomodationID = accomodationID;
+                accomodation.AccommodationId = accomodationID;
                 accomodation.Password = password;
             }
         }
@@ -59,7 +59,7 @@ namespace virtual_receptionist.Repositories
         /// <returns></returns>
         public Accomodation GetAccomodation()
         {
-            Accomodation accomodation = Accomodation.GetAccomodation();
+            Accomodation accomodation = Accomodation.GetAccommodation();
             SetAccomodation();
             return accomodation;
         }
@@ -81,7 +81,7 @@ namespace virtual_receptionist.Repositories
 
                 Accomodation accomodation = GetAccomodation();
 
-                if (accomodation.AccomodationID == accomodationID && accomodation.Password == password)
+                if (accomodation.AccommodationId == accomodationID && accomodation.Password == password)
                 {
                     return true;
                 }
