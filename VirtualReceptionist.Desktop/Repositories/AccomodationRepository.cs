@@ -75,23 +75,16 @@ namespace VirtualReceptionist.Desktop.Repositories
         /// <exception cref="InvalidConnectionTypeException"></exception>
         public bool Authentication(string accomodationID, string password, string connectionType)
         {
-            try
+            database.SetConnection();
+
+            Accommodation accomodation = GetAccomodation();
+
+            if (accomodation.AccommodationId == accomodationID && accomodation.Password == password)
             {
-                database.SetConnection();
-
-                Accommodation accomodation = GetAccomodation();
-
-                if (accomodation.AccommodationId == accomodationID && accomodation.Password == password)
-                {
-                    return true;
-                }
-
-                throw new FailedLoginException();
+                return true;
             }
-            catch (InvalidConnectionTypeException exception)
-            {
-                throw exception;
-            }
+
+            throw new FailedLoginException();
         }
 
         #endregion
