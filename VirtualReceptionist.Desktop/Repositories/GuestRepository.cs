@@ -97,7 +97,7 @@ namespace virtual_receptionist.Repositories
         /// <param name="guest">Guest objektum</param>
         public void Delete(Guest guest)
         {
-            string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.ID}\"";
+            string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.Id}\"";
             database.DML(sql);
         }
 
@@ -108,7 +108,7 @@ namespace virtual_receptionist.Repositories
         public void Update(Guest guest)
         {
             string sql =
-                $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.ID}\"";
+                $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.Id}\"";
             database.DML(sql);
         }
 
