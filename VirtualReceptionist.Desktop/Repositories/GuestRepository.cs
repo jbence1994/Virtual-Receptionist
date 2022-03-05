@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories.DAO;
 
 namespace VirtualReceptionist.Desktop.Repositories
 {
     /// <summary>
     /// Vendég adattár
     /// </summary>
-    public class GuestRepository : Repository, IGenericDAO<Guest>
+    public class GuestRepository : Repository
     {
         #region Adattagok
 
