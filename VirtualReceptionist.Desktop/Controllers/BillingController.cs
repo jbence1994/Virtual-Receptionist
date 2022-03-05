@@ -66,7 +66,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (Booking booking in bookingNotPaid)
             {
-                bookingsToBill.Rows.Add(booking.ID, booking.Guest.Name, booking.Room.Number, booking.NumberOfGuests,
+                bookingsToBill.Rows.Add(booking.Id, booking.Guest.Name, booking.Room.Number, booking.NumberOfGuests,
                     booking.ArrivalDate, booking.DepartureDate);
             }
 
@@ -138,7 +138,7 @@ namespace virtual_receptionist.Controllers
         {
             Booking booking = new Booking()
             {
-                ID = Convert.ToInt32(bookingID)
+                Id = Convert.ToInt32(bookingID)
             };
 
             billingRepository.SetBookingAsPaid(booking);

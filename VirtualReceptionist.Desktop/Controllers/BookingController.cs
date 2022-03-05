@@ -57,7 +57,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (Booking booking in bookingsByArrival)
             {
-                bookingsDataTableByArrival.Rows.Add(booking.ID, booking.Guest.Name, booking.Room.Number,
+                bookingsDataTableByArrival.Rows.Add(booking.Id, booking.Guest.Name, booking.Room.Number,
                     booking.NumberOfGuests, booking.ArrivalDate, booking.DepartureDate, booking.Paid);
             }
 
@@ -85,7 +85,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (Booking booking in bookingsByDeparture)
             {
-                bookingsDataTableByDeparture.Rows.Add(booking.ID, booking.Guest.Name, booking.Room.Number,
+                bookingsDataTableByDeparture.Rows.Add(booking.Id, booking.Guest.Name, booking.Room.Number,
                     booking.NumberOfGuests, booking.ArrivalDate, booking.DepartureDate, booking.Paid);
             }
 
