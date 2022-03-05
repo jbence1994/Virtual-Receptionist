@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using virtual_receptionist.Repositories.DAO;
 using VirtualReceptionist.Desktop.Models;
+using VirtualReceptionist.Desktop.Repositories.DAO;
 
-namespace virtual_receptionist.Repositories
+namespace VirtualReceptionist.Desktop.Repositories
 {
     /// <summary>
     /// Foglalások adattár

@@ -1,4 +1,4 @@
-﻿namespace virtual_receptionist.Repositories.DAO
+﻿namespace VirtualReceptionist.Desktop.Repositories.DAO
 {
     /// <summary>
     /// Adatmanipulációt objektumokon leíró generikus interfész

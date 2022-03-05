@@ -1,6 +1,6 @@
-﻿using virtual_receptionist.Repositories.MySQLConnection;
+﻿using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
-namespace virtual_receptionist.Repositories
+namespace VirtualReceptionist.Desktop.Repositories
 {
     /// <summary>
     /// Az alkalmazáshoz szükséges adatbázis adatokat perzisztensen tároló adattár osztály

@@ -2,7 +2,7 @@
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
 
-namespace virtual_receptionist.Repositories
+namespace VirtualReceptionist.Desktop.Repositories
 {
     /// <summary>
     /// Országok adattár

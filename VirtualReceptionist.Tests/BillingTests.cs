@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using virtual_receptionist.Repositories;
+using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionistTests.Billing
 {

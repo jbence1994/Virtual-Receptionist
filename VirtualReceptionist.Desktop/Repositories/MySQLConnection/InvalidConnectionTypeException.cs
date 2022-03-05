@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace virtual_receptionist.Repositories.MySQLConnection
+namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
 {
     /// <summary>
     /// Adatbázis kapcsolódás típus kivétel
