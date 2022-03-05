@@ -2,6 +2,7 @@
 using virtual_receptionist.Controllers.Validation;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Repositories.Models;
+using System.Collections.Generic;
 
 namespace virtual_receptionistTests.InputValidation
 {
