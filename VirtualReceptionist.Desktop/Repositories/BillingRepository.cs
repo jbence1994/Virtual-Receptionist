@@ -1,6 +1,6 @@
-﻿using virtual_receptionist.Repositories.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
+using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Repositories
 {
@@ -106,7 +106,7 @@ namespace virtual_receptionist.Repositories
         /// <param name="booking">Számlázott foglalás</param>
         public void SetBookingAsPaid(Booking booking)
         {
-            string sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.ID}\"";
+            string sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
             database.DML(sql);
         }
 

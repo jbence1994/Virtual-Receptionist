@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using virtual_receptionist.Repositories;
-using virtual_receptionist.Repositories.Models;
+using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Controllers
 {
@@ -60,7 +60,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (Guest guest in guests)
             {
-                guestDataTable.Rows.Add(guest.ID, guest.Name, guest.DocumentNumber,
+                guestDataTable.Rows.Add(guest.Id, guest.Name, guest.DocumentNumber,
                     guest.Citizenship, guest.BirthDate, guest.Country, guest.ZipCode,
                     guest.City, guest.Address, guest.PhoneNumber, guest.EmailAddress);
             }

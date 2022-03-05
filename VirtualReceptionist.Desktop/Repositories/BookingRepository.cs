@@ -1,8 +1,8 @@
-﻿using virtual_receptionist.Repositories.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Data;
 using virtual_receptionist.Repositories.DAO;
+using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Repositories
 {
@@ -148,7 +148,7 @@ namespace virtual_receptionist.Repositories
         /// <param name="booking">Booking objektum</param>>
         public void Delete(Booking booking)
         {
-            string sql = $"DELETE FROM booking WHERE booking.ID = \"{booking.ID}\"";
+            string sql = $"DELETE FROM booking WHERE booking.ID = \"{booking.Id}\"";
             database.DML(sql);
         }
 
@@ -159,7 +159,7 @@ namespace virtual_receptionist.Repositories
         public void Update(Booking booking)
         {
             string sql =
-                $"UPDATE booking SET booking.GuestID = (SELECT guest.ID FROM guest WHERE guest.Name = \"{booking.Guest.Name}\"), booking.RoomID = (SELECT room.ID FROM room WHERE room.Number = \"{booking.Room.Number}\"), NumberOfGuests = \"{booking.NumberOfGuests}\", ArrivalDate = \"{booking.ArrivalDate}\", DepartureDate = \"{booking.DepartureDate}\" WHERE booking.ID = \"{booking.ID}\"";
+                $"UPDATE booking SET booking.GuestID = (SELECT guest.ID FROM guest WHERE guest.Name = \"{booking.Guest.Name}\"), booking.RoomID = (SELECT room.ID FROM room WHERE room.Number = \"{booking.Room.Number}\"), NumberOfGuests = \"{booking.NumberOfGuests}\", ArrivalDate = \"{booking.ArrivalDate}\", DepartureDate = \"{booking.DepartureDate}\" WHERE booking.ID = \"{booking.Id}\"";
             database.DML(sql);
         }
 
