@@ -101,7 +101,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (BillingItem billingItem in billingItems)
             {
-                billingItemsDataTable.Rows.Add(billingItem.Name, billingItem.Price, billingItem.Category.VAT,
+                billingItemsDataTable.Rows.Add(billingItem.Name, billingItem.Price, billingItem.Category.Vat,
                     billingItem.Category.Name, billingItem.Category.Unit);
             }
 
