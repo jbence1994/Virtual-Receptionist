@@ -1,10 +1,10 @@
 ﻿namespace VirtualReceptionist.Desktop.Models
 {
-    public class Accomodation
+    public class Accommodation
     {
-        private static Accomodation _accommodationInstance;
+        private static Accommodation _accommodationInstance;
 
-        private Accomodation()
+        private Accommodation()
         {
         }
 
@@ -20,11 +20,11 @@
 
         public string Password { get; set; }
 
-        public static Accomodation GetAccommodation()
+        public static Accommodation GetAccommodation()
         {
             if (_accommodationInstance == null)
             {
-                return _accommodationInstance = new Accomodation();
+                return _accommodationInstance = new Accommodation();
             }
 
             return _accommodationInstance;

@@ -37,7 +37,7 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public string SetMainMenuHeader()
         {
-            Accomodation accomodation = repository.GetAccomodation();
+            Accommodation accomodation = repository.GetAccomodation();
             return $"{accomodation.Name} ({accomodation.VatNumber})";
         }
 
@@ -56,7 +56,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>A feltöltött sztring tömböt adja vissza a függvény</returns>
         public string[] GetAccomodationInfo()
         {
-            Accomodation accomodation = repository.GetAccomodation();
+            Accommodation accomodation = repository.GetAccomodation();
 
             string[] accomodationData = new string[8];
             accomodationData[0] = accomodation.Name;
