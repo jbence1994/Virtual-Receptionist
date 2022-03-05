@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using virtual_receptionist.Controllers.Validation;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Repositories.Models;
 
 namespace virtual_receptionistTests.InputValidation
 {
-    [TestFixture]
+    [TestClass()]
     public class InputValidationTests
     {
         #region Név ellenőrző tesztek
@@ -13,7 +13,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, üres-e a bemeneti név
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateNameTest_InCaseInputNameIsEmpty()
         {
             try
@@ -30,7 +30,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kisbetűvel kezdődik-e bemeneti név
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateNameTest_InCaseInputNamesFirstLetterIsLowercase()
         {
             try
@@ -47,7 +47,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, tartalmaz-e számot a bemeneti név
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateNameTest_InCaseInputNameContainsDigitCharacters()
         {
             try
@@ -64,7 +64,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, tartalmaz-e számot a bemeneti név
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateNameTest_InCaseInputNameIsValid()
         {
             try
@@ -84,7 +84,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, üres-e a bemeneti e-mail cím
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseInputNameIsEmpty()
         {
             try
@@ -101,7 +101,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsNotValidEmailFormat1()
         {
             try
@@ -118,7 +118,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsNotValidEmailFormat2()
         {
             try
@@ -135,7 +135,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsNotValidEmailFormat3()
         {
             try
@@ -152,7 +152,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsNotValidEmailFormat4()
         {
             try
@@ -169,7 +169,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsNotValidEmailFormat5()
         {
             try
@@ -186,7 +186,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes e-mail cím formátum-e a bemeneti e-mail cím /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateEmailTest_InCaseEmailIsValidEmailFormat()
         {
             try
@@ -206,7 +206,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, üres-e a bemeneti születési dátum
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsEmpty()
         {
             try
@@ -223,7 +223,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat1()
         {
             try
@@ -240,7 +240,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat2()
         {
             try
@@ -257,7 +257,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat3()
         {
             try
@@ -274,7 +274,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat4()
         {
             try
@@ -291,7 +291,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat5()
         {
             try
@@ -308,7 +308,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsNotValidBirthDateFormat6()
         {
             try
@@ -325,7 +325,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, érvényes születési dátum formátum-e bemeneti születési dátum /Regulax Expression/
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBirthDateTest_InCaseInputBirthDateIsValidBirthDateFormat()
         {
             try
@@ -345,7 +345,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, üres-e a bemeneti állampolgárság
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateCitizenshipTest_InCaseInputCitizenshipIsEmpty()
         {
             try
@@ -362,7 +362,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, helyes-e a bemeneti állampolgárság
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateCitizenshipTest_InCaseInputCitizenshipIsNotValid1()
         {
             try
@@ -379,7 +379,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, helyes-e a bemeneti állampolgárság
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateCitizenshipTest_InCaseInputCitizenshipIsNotValid2()
         {
             try
@@ -396,7 +396,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, helyes-e a bemeneti állampolgárság
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateCitizenshipTest_InCaseInputCitizenshipIsNotValid3()
         {
             try
@@ -413,7 +413,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, helyes-e a bemeneti állampolgárság
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateCitizenshipTest_InCaseInputCitizenshipIsValid()
         {
             try
@@ -433,7 +433,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha nagyobb vendégszámot adunk meg olyan szobára, amely annál kisebb kapacitással rendelkezik
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingCapacity_InCaseNumberOfGuestAreMoreThanRoomCapacity()
         {
             Room roomTestObject = new Room();
@@ -459,7 +459,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha kisebb vendégszámot adunk meg olyan szobára, amely annál nagyobb kapacitással rendelkezik
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingCapacity_InCaseNumberOfGuestAreLessThanRoomCapacity()
         {
             Room roomTestObject = new Room();
@@ -484,7 +484,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha ugyanolyan vendégszámot adunk meg olyan szobára, amely azzalé egyenlő kapacitással rendelkezik
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingCapacity_InCaseNumberOfGuestAreEqualsToRoomCapacity()
         {
             Room roomTestObject = new Room();
@@ -513,7 +513,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha az érkezés és távozás dátuma egyezik
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingDate_InCaseBookingArrivalDateIsEqualsToDepartureDate()
         {
             Booking bookingTestObject = new Booking();
@@ -534,7 +534,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha a távozás dátuma hamarabb van, mint az érkezés dátuma
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingDate_InCaseBookingArrivalDateIsLaterThanDepartureDate()
         {
             Booking bookingTestObject = new Booking();
@@ -555,7 +555,7 @@ namespace virtual_receptionistTests.InputValidation
         /// <summary>
         /// Tesztmetódus, amely ellenőrzi, kivételkezelésre kerül-e ha az érkezés dátuma hamarabb van, mint a távozás dátuma
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void ValidateBookingDate_InCaseBookingArrivalDateEarlierThanDepartureDate()
         {
             Booking bookingTestObject = new Booking();

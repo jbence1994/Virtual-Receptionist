@@ -1,15 +1,15 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using virtual_receptionist.Repositories;
 
 namespace virtual_receptionistTests.Billing
 {
-    [TestFixture]
+    [TestClass()]
     public class BillingTests
     {
         /// <summary>
         /// Tesztmetódus, amely kiszámolja 8.700 Ft 10%-át
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountDiscountPriceTest_DevelopFunction()
         {
             BillingRepository repository = new BillingRepository();
@@ -21,7 +21,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja 11.400 Ft 10%-át
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountDiscountPriceTest_Test1()
         {
             BillingRepository repository = new BillingRepository();
@@ -33,7 +33,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja 14.100 Ft 10%-át
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountDiscountPriceTest_Test2()
         {
             BillingRepository repository = new BillingRepository();
@@ -46,7 +46,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja 8700 Ft 20%-át
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountDiscountPriceTest_Test3()
         {
             BillingRepository repository = new BillingRepository();
@@ -59,7 +59,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja a paraméterül kapott ár-mennyiség arányában a végösszeget
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountTotalPriceTest_Test1()
         {
             BillingRepository repository = new BillingRepository();
@@ -76,7 +76,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja a paraméterül kapott ár-mennyiség arányában a végösszeget
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountTotalPriceTest_Test2()
         {
             BillingRepository repository = new BillingRepository();
@@ -93,7 +93,7 @@ namespace virtual_receptionistTests.Billing
         /// <summary>
         /// Tesztmetódus, amely kiszámolja a paraméterül kapott ár-mennyiség arányában a végösszeget
         /// </summary>
-        [Test]
+        [TestMethod()]
         public void CountTotalPriceTest_Test3()
         {
             BillingRepository repository = new BillingRepository();
