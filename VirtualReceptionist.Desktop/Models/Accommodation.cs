@@ -2,7 +2,7 @@
 {
     public class Accommodation
     {
-        private static Accommodation _accommodationInstance;
+        private static Accommodation _instance;
 
         private Accommodation()
         {
@@ -20,14 +20,9 @@
 
         public string Password { get; set; }
 
-        public static Accommodation GetAccommodation()
+        public static Accommodation GetInstance()
         {
-            if (_accommodationInstance == null)
-            {
-                return _accommodationInstance = new Accommodation();
-            }
-
-            return _accommodationInstance;
+            return _instance ?? new Accommodation();
         }
     }
 }

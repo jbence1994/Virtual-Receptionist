@@ -8,7 +8,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         protected Repository()
         {
-            Database = Database.GetDatabaseInstance();
+            Database = Database.GetInstance();
         }
     }
 }

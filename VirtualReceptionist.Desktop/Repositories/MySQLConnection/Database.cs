@@ -5,28 +5,28 @@ namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
 {
     public sealed class Database
     {
-        private static Database _databaseInstance;
-        private MySqlConnection _mySqlConnection;
-        private MySqlCommand _mySqlCommand;
-        private MySqlDataAdapter _mySqlDataAdapter;
+        private static Database _instance;
+        private MySqlConnection mySqlConnection;
+        private MySqlCommand mySqlCommand;
+        private MySqlDataAdapter mySqlDataAdapter;
 
         private Database()
         {
         }
 
-        public static Database GetDatabaseInstance()
+        public static Database GetInstance()
         {
-            if (_databaseInstance == null)
+            if (_instance == null)
             {
-                return _databaseInstance = new Database();
+                return _instance = new Database();
             }
 
-            return _databaseInstance;
+            return _instance;
         }
 
         public void SetConnection()
         {
-            _mySqlConnection = new MySqlConnection
+            mySqlConnection = new MySqlConnection
             {
                 ConnectionString =
                     "SERVER=127.0.0.1; DATABASE=virtual_receptionist; UID=root; PASSWORD=mySQLserver!12345; PORT=3306; SslMode=None;"
@@ -35,22 +35,22 @@ namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
 
         private void OpenConnection()
         {
-            if (_mySqlConnection.State != ConnectionState.Closed)
+            if (mySqlConnection.State != ConnectionState.Closed)
             {
                 return;
             }
 
-            _mySqlConnection.Open();
+            mySqlConnection.Open();
         }
 
         private void CloseConnection()
         {
-            if (_mySqlConnection.State != ConnectionState.Open)
+            if (mySqlConnection.State != ConnectionState.Open)
             {
                 return;
             }
 
-            _mySqlConnection.Close();
+            mySqlConnection.Close();
         }
 
         public DataTable Dql(string query)
@@ -59,18 +59,18 @@ namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
 
             var dataTable = new DataTable();
 
-            _mySqlCommand = new MySqlCommand
+            mySqlCommand = new MySqlCommand
             {
                 CommandText = query,
-                Connection = _mySqlConnection
+                Connection = mySqlConnection
             };
 
-            _mySqlDataAdapter = new MySqlDataAdapter
+            mySqlDataAdapter = new MySqlDataAdapter
             {
-                SelectCommand = _mySqlCommand
+                SelectCommand = mySqlCommand
             };
 
-            _mySqlDataAdapter.Fill(dataTable);
+            mySqlDataAdapter.Fill(dataTable);
 
             CloseConnection();
 
@@ -81,14 +81,14 @@ namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
         {
             OpenConnection();
 
-            _mySqlCommand = new MySqlCommand
+            mySqlCommand = new MySqlCommand
             {
                 CommandText = query,
-                Connection = _mySqlConnection
+                Connection = mySqlConnection
             };
 
-            _mySqlCommand.Prepare();
-            _mySqlCommand.ExecuteNonQuery();
+            mySqlCommand.Prepare();
+            mySqlCommand.ExecuteNonQuery();
 
             CloseConnection();
         }
@@ -97,15 +97,15 @@ namespace VirtualReceptionist.Desktop.Repositories.MySQLConnection
         {
             OpenConnection();
 
-            _mySqlCommand = new MySqlCommand
+            mySqlCommand = new MySqlCommand
             {
                 CommandText = query,
-                Connection = _mySqlConnection
+                Connection = mySqlConnection
             };
 
-            _mySqlCommand.Prepare();
+            mySqlCommand.Prepare();
 
-            var scalarQuery = _mySqlCommand.ExecuteScalar().ToString();
+            var scalarQuery = mySqlCommand.ExecuteScalar().ToString();
 
             CloseConnection();
 

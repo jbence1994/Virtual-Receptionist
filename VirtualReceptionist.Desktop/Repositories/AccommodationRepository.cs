@@ -10,7 +10,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         public AccommodationRepository()
         {
-            database = Database.GetDatabaseInstance();
+            database = Database.GetInstance();
         }
 
         private void SetAccommodation()
@@ -21,7 +21,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
             foreach (DataRow row in dataTable.Rows)
             {
-                var accommodation = Accommodation.GetAccommodation();
+                var accommodation = Accommodation.GetInstance();
 
                 accommodation.Name = row["AccomodationName"].ToString();
                 accommodation.CompanyName = row["CompanyName"].ToString();
@@ -38,7 +38,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         public Accommodation GetAccommodation()
         {
-            var accommodation = Accommodation.GetAccommodation();
+            var accommodation = Accommodation.GetInstance();
             SetAccommodation();
             return accommodation;
         }
