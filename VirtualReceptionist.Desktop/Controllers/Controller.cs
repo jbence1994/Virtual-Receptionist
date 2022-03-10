@@ -46,7 +46,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>Az országnevekkel feltöltött listával tér vissza a metódus</returns>
         public List<string> GetCountries()
         {
-            List<Country> countries = countryRepository.GetCountries();
+            var countries = countryRepository.GetCountries();
 
             List<string> countryNames = new List<string>();
 
