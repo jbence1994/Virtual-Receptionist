@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
+using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
 namespace VirtualReceptionist.Desktop.Repositories
 {
-    public class BillingRepository : Repository
+    public class BillingRepository
     {
+        private readonly Database database;
         private readonly List<BillingItem> billingItems;
 
         public BillingRepository()
         {
+            database = Database.GetInstance();
             billingItems = new List<BillingItem>();
         }
 
@@ -18,7 +21,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             const string sql =
                 "SELECT billing_item.BillingItemName, billing_item.Price, billing_item_category.VAT, billing_item_category.BillingItemCategoryName, billing_item_category.Unit FROM billing_item, billing_item_category WHERE billing_item.Category = billing_item_category.ID";
-            var dataTable = Database.Dql(sql);
+            var dataTable = database.Dql(sql);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -64,7 +67,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         public void SetBookingAsPaid(Booking booking)
         {
             var sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
-            Database.Dml(sql);
+            database.Dml(sql);
         }
     }
 }
