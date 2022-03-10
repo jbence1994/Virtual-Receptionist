@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
 
@@ -15,25 +16,31 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         private void UploadBillingItemsList()
         {
-            string sql =
+            const string sql =
                 "SELECT billing_item.BillingItemName, billing_item.Price, billing_item_category.VAT, billing_item_category.BillingItemCategoryName, billing_item_category.Unit FROM billing_item, billing_item_category WHERE billing_item.Category = billing_item_category.ID";
-            DataTable dt = Database.Dql(sql);
+            var dataTable = Database.Dql(sql);
 
-            foreach (DataRow row in dt.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
-                string name = row["BillingItemName"].ToString();
-                string categoryName = row["BillingItemCategoryName"].ToString();
-                double vat = double.Parse(row["VAT"].ToString());
-                string unit = row["Unit"].ToString();
-                double price = double.Parse(row["Price"].ToString());
+                var billingItemCategory = new BillingItemCategory
+                {
+                    Name = row["BillingItemCategoryName"].ToString(),
+                    Vat = Convert.ToDouble(row["VAT"].ToString()),
+                    Unit = row["Unit"].ToString()
+                };
 
-                BillingItemCategory billingItemCategoryInstance = new BillingItemCategory(categoryName, vat, unit);
-                BillingItem billingItemInstance = new BillingItem(name, billingItemCategoryInstance, price);
-                billingItems.Add(billingItemInstance);
+                var billingItem = new BillingItem
+                {
+                    Name = row["BillingItemName"].ToString(),
+                    Category = billingItemCategory,
+                    Price = Convert.ToDouble(row["Price"].ToString())
+                };
+
+                billingItems.Add(billingItem);
             }
         }
 
-        public List<BillingItem> GetBillingItems()
+        public IEnumerable<BillingItem> GetBillingItems()
         {
             if (billingItems.Count == 0)
             {
@@ -45,7 +52,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         public double CountDiscountPrice(double itemPrice, double footPercent)
         {
-            double difference = (itemPrice * footPercent) / 100;
+            var difference = (itemPrice * footPercent) / 100;
             return itemPrice - difference;
         }
 
@@ -56,7 +63,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
         public void SetBookingAsPaid(Booking booking)
         {
-            string sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
+            var sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
             Database.Dml(sql);
         }
     }
