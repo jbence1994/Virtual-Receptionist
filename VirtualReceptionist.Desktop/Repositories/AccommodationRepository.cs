@@ -1,10 +1,18 @@
 ﻿using System.Data;
 using VirtualReceptionist.Desktop.Models;
+using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
 namespace VirtualReceptionist.Desktop.Repositories
 {
-    public class AccommodationRepository : Repository
+    public class AccommodationRepository
     {
+        private readonly Database database;
+
+        public AccommodationRepository()
+        {
+            database = Database.GetDatabaseInstance();
+        }
+
         private void SetAccommodation()
         {
             const string sql =

@@ -39,7 +39,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         {
             string sql =
                 "SELECT billing_item.BillingItemName, billing_item.Price, billing_item_category.VAT, billing_item_category.BillingItemCategoryName, billing_item_category.Unit FROM billing_item, billing_item_category WHERE billing_item.Category = billing_item_category.ID";
-            DataTable dt = database.Dql(sql);
+            DataTable dt = Database.Dql(sql);
 
             foreach (DataRow row in dt.Rows)
             {
@@ -107,7 +107,7 @@ namespace VirtualReceptionist.Desktop.Repositories
         public void SetBookingAsPaid(Booking booking)
         {
             string sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
-            database.Dml(sql);
+            Database.Dml(sql);
         }
 
         #endregion
