@@ -1,6 +1,6 @@
 ﻿using virtual_receptionist.Controllers.Exceptions;
-using virtual_receptionist.Repositories;
 using System;
+using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionist.Controllers
 {
@@ -14,7 +14,7 @@ namespace virtual_receptionist.Controllers
         /// <summary>
         /// Szálláshely adattár osztály egy példánya
         /// </summary>
-        private AccomodationRepository repository;
+        private AccommodationRepository repository;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public LoginController()
         {
-            repository = new AccomodationRepository();
+            repository = new AccommodationRepository();
         }
 
         #endregion
@@ -42,23 +42,12 @@ namespace virtual_receptionist.Controllers
         /// <exception cref="Exception"></exception>
         public bool EnterApplication(string accomodationID, string password, string connectionType)
         {
-            try
+            if (repository.Authentication(accomodationID, password))
             {
-                if (repository.Authentication(accomodationID, password, connectionType))
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                return false;
-            }
-            catch (FailedLoginException exception)
-            {
-                throw exception;
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return false;
         }
 
         #endregion

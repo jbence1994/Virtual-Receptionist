@@ -1,10 +1,10 @@
 ﻿using System.Data;
 using System.Collections.Generic;
-using virtual_receptionist.Repositories;
 using System;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Controllers.Validation;
 using VirtualReceptionist.Desktop.Models;
+using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionist.Controllers
 {
@@ -54,7 +54,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>A foglalások adattáblájával tér vissza a metódus</returns>
         public DataTable GetBookingsToBill()
         {
-            List<Booking> bookingNotPaid = bookingRepository.GetBookingsNotPaid();
+            var bookingNotPaid = bookingRepository.GetBookingsNotPaid();
 
             DataTable bookingsToBill = new DataTable();
             bookingsToBill.Columns.Add("ID", typeof(int));
@@ -90,7 +90,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>A számlázási tételek adataival feltöltött adattáblát adja vissza a függvény</returns>
         public DataTable GetBillingItems()
         {
-            List<BillingItem> billingItems = billingRepository.GetBillingItems();
+            var billingItems = billingRepository.GetBillingItems();
 
             DataTable billingItemsDataTable = new DataTable();
             billingItemsDataTable.Columns.Add("Name", typeof(string));

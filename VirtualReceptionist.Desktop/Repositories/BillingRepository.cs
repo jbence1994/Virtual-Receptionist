@@ -1,69 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
+using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
-namespace virtual_receptionist.Repositories
+namespace VirtualReceptionist.Desktop.Repositories
 {
-    /// <summary>
-    /// Számlázás adattár
-    /// </summary>
-    public class BillingRepository : Repository
+    public class BillingRepository
     {
-        #region Adattagok
+        private readonly Database database;
+        private readonly List<BillingItem> billingItems;
 
-        /// <summary>
-        /// Számlázási tételeket tartalmazó lista
-        /// </summary>
-        private List<BillingItem> billingItems;
-
-        #endregion
-
-        #region Konstruktor
-
-        /// <summary>
-        /// Számlázás adattár konstruktora
-        /// </summary>
         public BillingRepository()
         {
+            database = Database.GetInstance();
             billingItems = new List<BillingItem>();
         }
 
-        #endregion
-
-        #region Adatfeltöltő metódusok
-
-        /// <summary>
-        /// Metódus, amely adatbázisból feltölti a számlázási tételek adatait tartalmazó listát
-        /// </summary>
         private void UploadBillingItemsList()
         {
-            string sql =
+            const string sql =
                 "SELECT billing_item.BillingItemName, billing_item.Price, billing_item_category.VAT, billing_item_category.BillingItemCategoryName, billing_item_category.Unit FROM billing_item, billing_item_category WHERE billing_item.Category = billing_item_category.ID";
-            DataTable dt = database.DQL(sql);
+            var dataTable = database.Dql(sql);
 
-            foreach (DataRow row in dt.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
-                string name = row["BillingItemName"].ToString();
-                string categoryName = row["BillingItemCategoryName"].ToString();
-                double vat = double.Parse(row["VAT"].ToString());
-                string unit = row["Unit"].ToString();
-                double price = double.Parse(row["Price"].ToString());
+                var billingItemCategory = new BillingItemCategory
+                {
+                    Name = row["BillingItemCategoryName"].ToString(),
+                    Vat = Convert.ToDouble(row["VAT"].ToString()),
+                    Unit = row["Unit"].ToString()
+                };
 
-                BillingItemCategory billingItemCategoryInstance = new BillingItemCategory(categoryName, vat, unit);
-                BillingItem billingItemInstance = new BillingItem(name, billingItemCategoryInstance, price);
-                billingItems.Add(billingItemInstance);
+                var billingItem = new BillingItem
+                {
+                    Name = row["BillingItemName"].ToString(),
+                    Category = billingItemCategory,
+                    Price = Convert.ToDouble(row["Price"].ToString())
+                };
+
+                billingItems.Add(billingItem);
             }
         }
 
-        #endregion
-
-        #region Adatelérési metódusok
-
-        /// <summary>
-        /// Metódus, amely feltölti a számlázási tételeket tartalmazó listát adatbázisból
-        /// </summary>
-        /// <returns>Az adatokkal feltöltött listával tér vissza a metódus</returns>
-        public List<BillingItem> GetBillingItems()
+        public IEnumerable<BillingItem> GetBillingItems()
         {
             if (billingItems.Count == 0)
             {
@@ -73,43 +53,21 @@ namespace virtual_receptionist.Repositories
             return billingItems;
         }
 
-        #endregion
-
-        #region Üzleti logika
-
-        /// <summary>
-        /// Metódus, amely tétel kedvezményt számít
-        /// </summary>
-        /// <param name="itemPrice">Tétel értéke, amelyből kedvezményt számol a függvény</param>
-        ///<param name="footPercent">Százalékláb értéke</param>
-        /// <returns>A kiszámolt kedvezmény értékével tér vissza a függvény</returns>
         public double CountDiscountPrice(double itemPrice, double footPercent)
         {
-            double difference = (itemPrice * footPercent) / 100;
+            var difference = (itemPrice * footPercent) / 100;
             return itemPrice - difference;
         }
 
-        /// <summary>
-        /// Metódus, amely kiszámolja a fizetendő végösszeget
-        /// </summary>
-        /// <param name="price">Tétel egységár</param>
-        /// <param name="quantity">Tétel mennyiség</param>
-        /// <returns>Fizetendő végösszeget adja vissza a függvény</returns>
         public double CountTotalPrice(double price, int quantity)
         {
             return price * quantity;
         }
 
-        /// <summary>
-        /// Metódus, amely számla nyomtatás esetén beállítja az adatbázisban fizetettre az adott foglalást
-        /// </summary>
-        /// <param name="booking">Számlázott foglalás</param>
         public void SetBookingAsPaid(Booking booking)
         {
-            string sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
-            database.DML(sql);
+            var sql = $"UPDATE booking SET booking.Paid = 1 WHERE booking.ID = \"{booking.Id}\"";
+            database.Dml(sql);
         }
-
-        #endregion
     }
 }
