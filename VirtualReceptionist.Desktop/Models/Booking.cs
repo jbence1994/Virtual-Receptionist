@@ -2,44 +2,6 @@
 {
     public class Booking
     {
-        public Booking(
-            int id,
-            Guest guest,
-            Room room,
-            int numberOfGuests,
-            string arrivalDate,
-            string departureDate
-        )
-        {
-            Id = id;
-            Guest = guest;
-            Room = room;
-            NumberOfGuests = numberOfGuests;
-            ArrivalDate = arrivalDate;
-            DepartureDate = departureDate;
-        }
-
-        public Booking(
-            Guest guest,
-            Room room,
-            int numberOfGuests,
-            string arrivalDate,
-            string departureDate,
-            bool paid
-        )
-        {
-            Guest = guest;
-            Room = room;
-            NumberOfGuests = numberOfGuests;
-            ArrivalDate = arrivalDate;
-            DepartureDate = departureDate;
-            Paid = paid;
-        }
-
-        public Booking()
-        {
-        }
-
         public int Id { get; set; }
         public Guest Guest { get; set; }
         public Room Room { get; set; }
