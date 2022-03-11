@@ -8,24 +8,6 @@
             Room room,
             int numberOfGuests,
             string arrivalDate,
-            string departureDate,
-            bool paid)
-        {
-            Id = id;
-            Guest = guest;
-            Room = room;
-            NumberOfGuests = numberOfGuests;
-            ArrivalDate = arrivalDate;
-            DepartureDate = departureDate;
-            Paid = paid;
-        }
-
-        public Booking(
-            int id,
-            Guest guest,
-            Room room,
-            int numberOfGuests,
-            string arrivalDate,
             string departureDate
         )
         {

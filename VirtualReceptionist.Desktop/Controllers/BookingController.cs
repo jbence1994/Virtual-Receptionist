@@ -20,6 +20,8 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         private BookingRepository repository;
 
+        private RoomRepository _roomRepository;
+
         #endregion
 
         #region Konstruktor
@@ -30,6 +32,7 @@ namespace virtual_receptionist.Controllers
         public BookingController()
         {
             repository = new BookingRepository();
+            _roomRepository = new RoomRepository();
         }
 
         #endregion
@@ -44,7 +47,7 @@ namespace virtual_receptionist.Controllers
         public DataTable GetBookingsByArrivalDate(DateTime arrivalDate)
         {
             string arrival = arrivalDate.ToString("yyyy-MM-dd");
-            List<Booking> bookingsByArrival = repository.GetGuestBookingsByArrivalDate(arrival);
+            var bookingsByArrival = repository.GetGuestBookingsByArrivalDate(arrival);
 
             DataTable bookingsDataTableByArrival = new DataTable();
             bookingsDataTableByArrival.Columns.Add("ID", typeof(int));
@@ -72,7 +75,7 @@ namespace virtual_receptionist.Controllers
         public DataTable GetBookingsByDepartureDate(DateTime departureDate)
         {
             string departure = departureDate.ToString("yyyy-MM-dd");
-            List<Booking> bookingsByDeparture = repository.GetGuestBookingsByDepartureDate(departure);
+            var bookingsByDeparture = repository.GetGuestBookingsByDepartureDate(departure);
 
             DataTable bookingsDataTableByDeparture = new DataTable();
             bookingsDataTableByDeparture.Columns.Add("ID", typeof(int));
@@ -214,7 +217,7 @@ namespace virtual_receptionist.Controllers
         {
             Room room = new Room()
             {
-                Capacity = repository.GetRoomCapacity(roomNumber)
+                Capacity = _roomRepository.GetRoomCapacity(roomNumber)
             };
 
             Booking booking = new Booking()

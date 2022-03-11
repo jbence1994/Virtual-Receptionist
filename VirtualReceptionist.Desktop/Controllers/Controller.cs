@@ -13,6 +13,7 @@ namespace virtual_receptionist.Controllers
     {
         #region Adattagok
 
+        private readonly RoomRepository _roomRepository;
         /// <summary>
         /// Ország adattár egy példánya
         /// </summary>
@@ -32,6 +33,7 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public Controller()
         {
+            _roomRepository = new RoomRepository();
             countryRepository = new CountryRepository();
             bookingRepository = new BookingRepository();
         }
@@ -64,7 +66,7 @@ namespace virtual_receptionist.Controllers
         /// <returns></returns>
         public List<int> GetRooms()
         {
-            List<Room> rooms = bookingRepository.GetRooms();
+            var rooms = _roomRepository.GetRooms();
 
             List<int> roomNumbers = new List<int>();
 

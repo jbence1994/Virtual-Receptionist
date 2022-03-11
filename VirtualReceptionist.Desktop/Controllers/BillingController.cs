@@ -54,7 +54,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>A foglalások adattáblájával tér vissza a metódus</returns>
         public DataTable GetBookingsToBill()
         {
-            List<Booking> bookingNotPaid = bookingRepository.GetBookingsNotPaid();
+            var bookingNotPaid = bookingRepository.GetBookingsNotPaid();
 
             DataTable bookingsToBill = new DataTable();
             bookingsToBill.Columns.Add("ID", typeof(int));
