@@ -337,17 +337,7 @@ namespace virtual_receptionist.Views
 
                 if (delete == DialogResult.Yes)
                 {
-                    int id = int.Parse(listViewGuest.SelectedItems[0].Text);
-                    string name = listViewGuest.SelectedItems[0].SubItems[1].Text;
-                    string documentNumber = listViewGuest.SelectedItems[0].SubItems[2].Text;
-                    string citizenship = listViewGuest.SelectedItems[0].SubItems[3].Text;
-                    string birthDate = listViewGuest.SelectedItems[0].SubItems[4].Text;
-                    string country = comboBoxCountry.SelectedItem.ToString();
-                    string zipCode = listViewGuest.SelectedItems[0].SubItems[6].Text;
-                    string city = listViewGuest.SelectedItems[0].SubItems[7].Text;
-                    string address = listViewGuest.SelectedItems[0].SubItems[8].Text;
-                    string phoneNumber = listViewGuest.SelectedItems[0].SubItems[9].Text;
-                    string email = listViewGuest.SelectedItems[0].SubItems[10].Text;
+                    int id = Convert.ToInt32(listViewGuest.SelectedItems[0].Text);
 
                     // ListView rekord törlés (GUI)
                     int index = listViewGuest.FocusedItem.Index;
@@ -369,8 +359,7 @@ namespace virtual_receptionist.Views
                     textBoxEmailAddress.Clear();
 
                     //Adatbázis rekord törlése
-                    controller.DeleteGuest(id, name, documentNumber, citizenship, birthDate,
-                        country, zipCode, city, address, phoneNumber, email);
+                    controller.DeleteGuest(id);
                 }
             }
             else
