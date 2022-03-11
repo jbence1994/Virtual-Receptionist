@@ -107,14 +107,12 @@ namespace virtual_receptionist.Views
 
                 if (delete == DialogResult.Yes)
                 {
-                    object id = dataGridViewBookings.SelectedRows[0].Cells[0].Value;
+                    var id = Convert.ToInt32(dataGridViewBookings.SelectedRows[0].Cells[0].Value);
 
                     int row = dataGridViewBookings.SelectedRows[0].Index;
                     dataGridViewBookings.Rows.RemoveAt(row);
 
-                    controller.DeleteBooking(
-                        Convert.ToInt32(id)
-                    );
+                    controller.DeleteBooking(id);
 
                     MessageBox.Show("A foglalás sikeresen törlésre került!", "", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
