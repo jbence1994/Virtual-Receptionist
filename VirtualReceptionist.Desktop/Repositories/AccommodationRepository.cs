@@ -13,16 +13,16 @@ namespace VirtualReceptionist.Desktop.Repositories
             database = Database.GetInstance();
         }
 
-        private void SetAccommodation()
+        public Accommodation GetAccommodation()
         {
+            var accommodation = Accommodation.GetInstance();
+
             const string sql =
                 "SELECT accomodation.ID, accomodation.AccomodationName, accomodation.CompanyName, accomodation.Contact, accomodation.VATNumber, accomodation.Headquarters, accomodation.Site, accomodation.PhoneNumber, accomodation.EmailAddress, accomodation_profile.AccomodationID, accomodation_profile.Password FROM accomodation, accomodation_profile WHERE accomodation.ID = accomodation_profile.Accomodation";
             var dataTable = database.Dql(sql);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                var accommodation = Accommodation.GetInstance();
-
                 accommodation.Name = row["AccomodationName"].ToString();
                 accommodation.CompanyName = row["CompanyName"].ToString();
                 accommodation.Contact = row["Contact"].ToString();
@@ -34,12 +34,7 @@ namespace VirtualReceptionist.Desktop.Repositories
                 accommodation.AccommodationId = row["AccomodationID"].ToString();
                 accommodation.Password = row["Password"].ToString();
             }
-        }
 
-        public Accommodation GetAccommodation()
-        {
-            var accommodation = Accommodation.GetInstance();
-            SetAccommodation();
             return accommodation;
         }
 
