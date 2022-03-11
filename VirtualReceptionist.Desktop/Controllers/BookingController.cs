@@ -119,38 +119,22 @@ namespace virtual_receptionist.Controllers
 
             bool paid = false;
 
-            Booking booking = new Booking(guest, room, numberOfGuests, arrivalDate, departureDate, paid);
+            var booking = new Booking
+            {
+                Guest = guest,
+                Room = room,
+                NumberOfGuests = numberOfGuests,
+                ArrivalDate = arrivalDate,
+                DepartureDate = departureDate,
+                Paid = paid
+            };
 
             repository.Create(booking);
         }
 
-        /// <summary>
-        /// Foglalás törlése
-        /// </summary>
-        /// <param name="bookingParameters">Foglalás paraméterei</param>
-        public void DeleteBooking(params object[] bookingParameters)
+        public void DeleteBooking(int id)
         {
-            int id = Convert.ToInt32(bookingParameters[0]);
-
-            Guest guest = new Guest()
-            {
-                Name = bookingParameters[1].ToString()
-            };
-
-            Room room = new Room()
-            {
-                Number = Convert.ToInt32(bookingParameters[2])
-            };
-
-            int numberOfGuests = Convert.ToInt32(bookingParameters[3]);
-
-            string arrivalDate = Convert.ToDateTime(bookingParameters[4].ToString()).ToString("yyyy-MM-dd");
-
-            string departureDate = Convert.ToDateTime(bookingParameters[5].ToString()).ToString("yyyy-MM-dd");
-
-            Booking booking = new Booking(id, guest, room, numberOfGuests, arrivalDate, departureDate);
-
-            repository.Delete(booking);
+            repository.Delete(id);
         }
 
         /// <summary>
@@ -177,7 +161,15 @@ namespace virtual_receptionist.Controllers
 
             string departureDate = Convert.ToDateTime(bookingParameters[5]).ToString("yyyy-MM-dd");
 
-            Booking booking = new Booking(id, guest, room, numberOfGuests, arrivalDate, departureDate);
+            var booking = new Booking
+            {
+                Id = id,
+                Guest = guest,
+                Room = room,
+                NumberOfGuests = numberOfGuests,
+                ArrivalDate = arrivalDate,
+                DepartureDate = departureDate
+            };
 
             repository.Update(booking);
         }
