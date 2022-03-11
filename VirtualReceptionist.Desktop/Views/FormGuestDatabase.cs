@@ -337,7 +337,7 @@ namespace virtual_receptionist.Views
 
                 if (delete == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(listViewGuest.SelectedItems[0].Text);
+                    var id = Convert.ToInt32(listViewGuest.SelectedItems[0].Text);
 
                     // ListView rekord törlés (GUI)
                     int index = listViewGuest.FocusedItem.Index;
