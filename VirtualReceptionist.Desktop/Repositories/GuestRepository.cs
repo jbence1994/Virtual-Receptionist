@@ -1,50 +1,82 @@
-﻿using System;
+﻿using virtual_receptionist.Repositories.DAO;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using System;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
-namespace VirtualReceptionist.Desktop.Repositories
+namespace virtual_receptionist.Repositories
 {
-    public class GuestRepository
+    /// <summary>
+    /// Vendég adattár
+    /// </summary>
+    public class GuestRepository : Repository, IGenericDAO<Guest>
     {
-        private readonly Database database;
-        private readonly List<Guest> guests;
+        #region Adattagok
 
+        /// <summary>
+        /// Vendégeket tartalmazó lista
+        /// </summary>
+        private List<Guest> guests;
+
+        /// <summary>
+        /// Országokat tartalmazó lista
+        /// </summary>
+        private List<Country> countries;
+
+        #endregion
+
+        #region Konstruktor
+
+        /// <summary>
+        /// Vendég adattár konstruktora
+        /// </summary>
         public GuestRepository()
         {
-            database = Database.GetInstance();
             guests = new List<Guest>();
+            countries = new List<Country>();
         }
 
+        #endregion
+
+        #region Adatfeltöltő metódusok
+
+        /// <summary>
+        /// Metódus, amely adatbázisból feltölti a vendégek adatait tartalmazó listát
+        /// </summary>
         private void UploadGuestsList()
         {
-            const string sql =
+            string sql =
                 "SELECT guest.ID, guest.Name, guest.DocumentNumber, guest.Citizenship, guest.BirthDate, country.CountryName, guest.ZipCode, guest.City, guest.Address, guest.PhoneNumber, guest.EmailAddress FROM guest, country WHERE guest.Country = country.ID";
-            var dataTable = database.Dql(sql);
+            DataTable dt = database.DQL(sql);
 
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow row in dt.Rows)
             {
-                var guest = new Guest
-                {
-                    Id = Convert.ToInt32(row["ID"]),
-                    Name = row["Name"].ToString(),
-                    DocumentNumber = row["DocumentNumber"].ToString(),
-                    Citizenship = row["Citizenship"].ToString(),
-                    BirthDate = Convert.ToDateTime(row["BirthDate"]).ToString("yyyy-MM-dd"),
-                    Country = row["CountryName"].ToString(),
-                    ZipCode = row["ZipCode"].ToString(),
-                    City = row["City"].ToString(),
-                    Address = row["Address"].ToString(),
-                    PhoneNumber = row["PhoneNumber"].ToString(),
-                    EmailAddress = row["EmailAddress"].ToString()
-                };
+                int id = Convert.ToInt32(row["ID"]);
+                string name = row["Name"].ToString();
+                string documentNumber = row["DocumentNumber"].ToString();
+                string citizenship = row["Citizenship"].ToString();
+                string birthDate = Convert.ToDateTime(row["BirthDate"]).ToString("yyyy-MM-dd");
+                string country = row["CountryName"].ToString();
+                string zipCode = row["ZipCode"].ToString();
+                string city = row["City"].ToString();
+                string address = row["Address"].ToString();
+                string phoneNumber = row["PhoneNumber"].ToString();
+                string emailAddress = row["EmailAddress"].ToString();
 
+                Guest guest = new Guest(id, name, documentNumber, citizenship, birthDate,
+                    country, zipCode, city, address, phoneNumber, emailAddress);
                 guests.Add(guest);
             }
         }
 
+        #endregion
+
+        #region Adatelérési metódusok
+
+        /// <summary>
+        /// Metódus, amely feltölti a vendégeket tartalmazó listát adatbázisból
+        /// </summary>
+        /// <returns>Az adatokkal feltöltött listával tér vissza a metódus</returns>
         public List<Guest> GetGuests()
         {
             if (guests.Count == 0)
@@ -55,55 +87,89 @@ namespace VirtualReceptionist.Desktop.Repositories
             return guests;
         }
 
+        #endregion
+
+        #region Adatmanipulációs metódusok
+
+        /// <summary>
+        /// Meglévő vendég törlése adatbázisból
+        /// </summary>
+        /// <param name="guest">Guest objektum</param>
         public void Delete(Guest guest)
         {
-            var sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.Id}\"";
-            database.Dml(sql);
+            string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.Id}\"";
+            database.DML(sql);
         }
 
+        /// <summary>
+        /// Meglévő vendég módosítása adatbázisban
+        /// </summary>
+        /// <param name="guest">Guest objektum</param>
         public void Update(Guest guest)
         {
-            var sql =
+            string sql =
                 $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.Id}\"";
-            database.Dml(sql);
+            database.DML(sql);
         }
 
+        /// <summary>
+        /// Új vendég létrehozása adatbázisban
+        /// </summary>
+        /// <param name="guest">Guest objektum</param>
         public void Create(Guest guest)
         {
-            var sql =
+            string sql =
                 $"INSERT INTO guest(Name, DocumentNumber, Citizenship, BirthDate, Country, ZipCode, City, Address, PhoneNumber, EmailAddress) VALUES(\"{guest.Name}\", \"{guest.DocumentNumber}\", \"{guest.Citizenship}\", \"{guest.BirthDate}\", (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), \"{guest.ZipCode}\", \"{guest.City}\", \"{guest.Address}\", \"{guest.PhoneNumber}\", \"{guest.EmailAddress}\")";
-            database.Dml(sql);
+            database.DML(sql);
         }
 
+        #endregion
+
+        #region Üzleti logika
+
+        /// <summary>
+        /// Metódus, amely visszaadja a soron következő vendégazonosítót adatbázisból
+        /// </summary>
+        /// <returns>Az adatbázisban soron következő vendégazonosítót adja vissza a függvény</returns>
         public int GetNextGuestID()
         {
-            const string sql = "SELECT MAX(guest.ID) FROM guest";
-            var maxId = database.ScalarDql(sql);
+            string sql = "SELECT MAX(guest.ID) FROM guest";
+            string maxID = database.ScalarDQL(sql);
 
-            int.TryParse(maxId, out var nextID);
+            int.TryParse(maxID, out int nextID);
 
             return nextID + 1;
         }
 
+        /// <summary>
+        /// Metódus, amely kiszűri név alapján a vendéglistából a vendég adatait számlázáshoz
+        /// </summary>
+        /// <param name="name">Vendég neve</param>
+        /// <returns>A vendég adatait tároló sztringtömbbel tér vissza a függvény</returns>
         public string[] GetGuestDataForBilling(string name)
         {
-            var data = new string[5];
+            string[] data = new string[5];
 
             if (guests.Count == 0)
             {
                 UploadGuestsList();
             }
 
-            foreach (var guest in guests.Where(guest => guest.Name == name))
+            foreach (Guest guest in guests)
             {
-                data[0] = guest.Name;
-                data[1] = guest.Country;
-                data[2] = guest.City;
-                data[3] = guest.ZipCode;
-                data[4] = guest.Address;
+                if (guest.Name == name)
+                {
+                    data[0] = guest.Name;
+                    data[1] = guest.Country;
+                    data[2] = guest.City;
+                    data[3] = guest.ZipCode;
+                    data[4] = guest.Address;
+                }
             }
 
             return data;
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
-﻿using virtual_receptionist.Views;
+﻿using virtual_receptionist.Repositories;
+using virtual_receptionist.Views;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionist.Controllers
 {
@@ -14,7 +14,7 @@ namespace virtual_receptionist.Controllers
         /// <summary>
         /// Szálláshely adattár egy példánya
         /// </summary>
-        private AccommodationRepository repository;
+        private AccomodationRepository repository;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public MainMenuController()
         {
-            repository = new AccommodationRepository();
+            repository = new AccomodationRepository();
         }
 
         #endregion
@@ -37,7 +37,7 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public string SetMainMenuHeader()
         {
-            Accommodation accomodation = repository.GetAccommodation();
+            Accommodation accomodation = repository.GetAccomodation();
             return $"{accomodation.Name} ({accomodation.VatNumber})";
         }
 
@@ -56,7 +56,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>A feltöltött sztring tömböt adja vissza a függvény</returns>
         public string[] GetAccomodationInfo()
         {
-            Accommodation accomodation = repository.GetAccommodation();
+            Accommodation accomodation = repository.GetAccomodation();
 
             string[] accomodationData = new string[8];
             accomodationData[0] = accomodation.Name;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using virtual_receptionist.Repositories;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Controllers.Validation;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionist.Controllers
 {
@@ -13,7 +13,6 @@ namespace virtual_receptionist.Controllers
     {
         #region Adattagok
 
-        private readonly RoomRepository _roomRepository;
         /// <summary>
         /// Ország adattár egy példánya
         /// </summary>
@@ -33,7 +32,6 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public Controller()
         {
-            _roomRepository = new RoomRepository();
             countryRepository = new CountryRepository();
             bookingRepository = new BookingRepository();
         }
@@ -48,7 +46,7 @@ namespace virtual_receptionist.Controllers
         /// <returns>Az országnevekkel feltöltött listával tér vissza a metódus</returns>
         public List<string> GetCountries()
         {
-            var countries = countryRepository.GetCountries();
+            List<Country> countries = countryRepository.GetCountries();
 
             List<string> countryNames = new List<string>();
 
@@ -66,7 +64,7 @@ namespace virtual_receptionist.Controllers
         /// <returns></returns>
         public List<int> GetRooms()
         {
-            var rooms = _roomRepository.GetRooms();
+            List<Room> rooms = bookingRepository.GetRooms();
 
             List<int> roomNumbers = new List<int>();
 
