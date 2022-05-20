@@ -3,8 +3,8 @@ using System.Data;
 using System.Collections.Generic;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Controllers.Validation;
+using virtual_receptionist.Repositories;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories;
 
 namespace virtual_receptionist.Controllers
 {
@@ -20,8 +20,6 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         private BookingRepository repository;
 
-        private RoomRepository _roomRepository;
-
         #endregion
 
         #region Konstruktor
@@ -32,7 +30,6 @@ namespace virtual_receptionist.Controllers
         public BookingController()
         {
             repository = new BookingRepository();
-            _roomRepository = new RoomRepository();
         }
 
         #endregion
@@ -47,7 +44,7 @@ namespace virtual_receptionist.Controllers
         public DataTable GetBookingsByArrivalDate(DateTime arrivalDate)
         {
             string arrival = arrivalDate.ToString("yyyy-MM-dd");
-            var bookingsByArrival = repository.GetGuestBookingsByArrivalDate(arrival);
+            List<Booking> bookingsByArrival = repository.GetGuestBookingsByArrivalDate(arrival);
 
             DataTable bookingsDataTableByArrival = new DataTable();
             bookingsDataTableByArrival.Columns.Add("ID", typeof(int));
@@ -75,7 +72,7 @@ namespace virtual_receptionist.Controllers
         public DataTable GetBookingsByDepartureDate(DateTime departureDate)
         {
             string departure = departureDate.ToString("yyyy-MM-dd");
-            var bookingsByDeparture = repository.GetGuestBookingsByDepartureDate(departure);
+            List<Booking> bookingsByDeparture = repository.GetGuestBookingsByDepartureDate(departure);
 
             DataTable bookingsDataTableByDeparture = new DataTable();
             bookingsDataTableByDeparture.Columns.Add("ID", typeof(int));
@@ -217,7 +214,7 @@ namespace virtual_receptionist.Controllers
         {
             Room room = new Room()
             {
-                Capacity = _roomRepository.GetRoomCapacity(roomNumber)
+                Capacity = repository.GetRoomCapacity(roomNumber)
             };
 
             Booking booking = new Booking()

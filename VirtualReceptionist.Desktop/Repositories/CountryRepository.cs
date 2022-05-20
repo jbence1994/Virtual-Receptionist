@@ -1,38 +1,65 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using VirtualReceptionist.Desktop.Models;
-using VirtualReceptionist.Desktop.Repositories.MySQLConnection;
 
-namespace VirtualReceptionist.Desktop.Repositories
+namespace virtual_receptionist.Repositories
 {
-    public class CountryRepository
+    /// <summary>
+    /// Országok adattár
+    /// </summary>
+    public class CountryRepository : Repository
     {
-        private readonly Database database;
-        private readonly List<Country> countries;
+        #region Adattagok
 
+        /// <summary>
+        /// Országokat tartalmazó lista
+        /// </summary>
+        private List<Country> countries;
+
+        #endregion
+
+        #region Konstruktor
+
+        /// <summary>
+        /// Országok adattár konstruktora
+        /// </summary>
         public CountryRepository()
         {
-            database = Database.GetInstance();
             countries = new List<Country>();
         }
 
-        private void UploadCountriesList()
+        #endregion
+
+        #region Adatfeltöltő metódusok
+
+        /// <summary>
+        /// Metódus, amely adatbázisból feltölti az országok adatait tartalmazó listát
+        /// </summary>
+        private List<Country> UploadCountriesList()
         {
-            const string sql = "SELECT * FROM country";
-            var dataTable = database.Dql(sql);
+            string sql = "SELECT * FROM country";
+            DataTable dt = database.DQL(sql);
 
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow row in dt.Rows)
             {
-                var country = new Country
-                {
-                    Name = row["CountryName"].ToString()
-                };
+                string name = row["CountryName"].ToString();
 
-                countries.Add(country);
+                Country countryInstance = new Country(name);
+                countries.Add(countryInstance);
             }
+
+            return countries;
         }
 
-        public IEnumerable<Country> GetCountries()
+        #endregion
+
+        #region Adatelérési metódusok
+
+        /// <summary>
+        /// Metódus, amely feltölti az országokat tartalmazó listát adatbázisból
+        /// </summary>
+        /// <returns>Az adatokkal feltöltött listával tér vissza a metódus</returns>
+        public List<Country> GetCountries()
         {
             if (countries.Count == 0)
             {
@@ -41,5 +68,7 @@ namespace VirtualReceptionist.Desktop.Repositories
 
             return countries;
         }
+
+        #endregion
     }
 }
