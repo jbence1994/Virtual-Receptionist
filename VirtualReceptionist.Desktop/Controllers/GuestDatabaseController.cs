@@ -129,20 +129,8 @@ namespace virtual_receptionist.Controllers
             string phoneNumber = guestParameters[8].ToString();
             string email = guestParameters[9].ToString();
 
-            var guest = new Guest
-            {
-                Name = name,
-                DocumentNumber = documentNumber,
-                Citizenship = citizenship,
-                BirthDate = birthDate,
-                Country = country,
-                ZipCode = zipCode,
-                City = city,
-                Address = address,
-                PhoneNumber = phoneNumber,
-                EmailAddress = email
-            };
-
+            Guest guest = new Guest(name, documentNumber, citizenship, birthDate, country, zipCode, city, address,
+                phoneNumber, email);
             repository.Create(guest);
         }
 
@@ -164,27 +152,32 @@ namespace virtual_receptionist.Controllers
             string phoneNumber = guestParameters[9].ToString();
             string email = guestParameters[10].ToString();
 
-            var guest = new Guest
-            {
-                Id = id,
-                Name = name,
-                DocumentNumber = documentNumber,
-                Citizenship = citizenship,
-                BirthDate = birthDate,
-                Country = country,
-                ZipCode = zipCode,
-                City = city,
-                Address = address,
-                PhoneNumber = phoneNumber,
-                EmailAddress = email
-            };
-
+            Guest guest = new Guest(id, name, documentNumber, citizenship, birthDate, country, zipCode, city, address,
+                phoneNumber, email);
             repository.Update(guest);
         }
 
-        public void DeleteGuest(int id)
+        /// <summary>
+        /// Vendégtáblázatból és adatbázisból meglévő rekord törlésére szolgáló metódus
+        /// </summary>
+        /// <param name="guestParameters">Vendég paraméterei</param>
+        public void DeleteGuest(params object[] guestParameters)
         {
-            repository.Delete(id);
+            int id = int.Parse(guestParameters[0].ToString());
+            string name = guestParameters[1].ToString();
+            string documentNumber = guestParameters[2].ToString();
+            string citizenship = guestParameters[3].ToString();
+            string birthDate = guestParameters[4].ToString();
+            string country = guestParameters[5].ToString();
+            string zipCode = guestParameters[6].ToString();
+            string city = guestParameters[7].ToString();
+            string address = guestParameters[8].ToString();
+            string phoneNumber = guestParameters[9].ToString();
+            string email = guestParameters[10].ToString();
+
+            Guest guest = new Guest(id, name, documentNumber, citizenship, birthDate, country, zipCode, city, address,
+                phoneNumber, email);
+            repository.Delete(guest);
         }
 
         #endregion
