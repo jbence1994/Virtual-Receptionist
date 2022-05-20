@@ -1,8 +1,8 @@
 ﻿using virtual_receptionist.Repositories.DAO;
 using System.Collections.Generic;
+using virtual_receptionist.Repositories.Models;
 using System.Data;
 using System;
-using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Repositories
 {
@@ -97,7 +97,7 @@ namespace virtual_receptionist.Repositories
         /// <param name="guest">Guest objektum</param>
         public void Delete(Guest guest)
         {
-            string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.Id}\"";
+            string sql = $"DELETE FROM guest WHERE guest.ID = \"{guest.ID}\"";
             database.DML(sql);
         }
 
@@ -108,7 +108,7 @@ namespace virtual_receptionist.Repositories
         public void Update(Guest guest)
         {
             string sql =
-                $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.Id}\"";
+                $"UPDATE guest SET guest.Name=\"{guest.Name}\", guest.DocumentNumber=\"{guest.DocumentNumber}\", guest.Citizenship=\"{guest.Citizenship}\", guest.BirthDate=\"{guest.BirthDate}\", guest.Country = (SELECT country.ID FROM country WHERE country.CountryName = \"{guest.Country}\"), guest.ZipCode=\"{guest.ZipCode}\", guest.City=\"{guest.City}\", guest.Address=\"{guest.Address}\", guest.PhoneNumber=\"{guest.PhoneNumber}\", guest.EmailAddress=\"{guest.EmailAddress}\" WHERE guest.ID = \"{guest.ID}\"";
             database.DML(sql);
         }
 

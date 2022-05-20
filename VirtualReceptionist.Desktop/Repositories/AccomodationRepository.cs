@@ -1,7 +1,7 @@
-﻿using System.Data;
+﻿using virtual_receptionist.Repositories.Models;
+using System.Data;
 using virtual_receptionist.Repositories.MySQLConnection;
 using virtual_receptionist.Controllers.Exceptions;
-using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Repositories
 {
@@ -35,16 +35,16 @@ namespace virtual_receptionist.Repositories
                 string accomodationID = row["AccomodationID"].ToString();
                 string password = row["Password"].ToString();
 
-                Accommodation accomodation = Accommodation.GetAccommodation();
-                accomodation.Name = name;
+                Accomodation accomodation = Accomodation.GetAccomodation();
+                accomodation.AccomodationName = name;
                 accomodation.CompanyName = company;
                 accomodation.Contact = contact;
-                accomodation.VatNumber = vatNumber;
+                accomodation.VATNumber = vatNumber;
                 accomodation.Headquarters = headquarters;
                 accomodation.Site = site;
                 accomodation.PhoneNumber = phoneNumber;
                 accomodation.EmailAddress = email;
-                accomodation.AccommodationId = accomodationID;
+                accomodation.AccomodationID = accomodationID;
                 accomodation.Password = password;
             }
         }
@@ -57,9 +57,9 @@ namespace virtual_receptionist.Repositories
         /// 
         /// </summary>
         /// <returns></returns>
-        public Accommodation GetAccomodation()
+        public Accomodation GetAccomodation()
         {
-            Accommodation accomodation = Accommodation.GetAccommodation();
+            Accomodation accomodation = Accomodation.GetAccomodation();
             SetAccomodation();
             return accomodation;
         }
@@ -79,9 +79,9 @@ namespace virtual_receptionist.Repositories
             {
                 database.SetConnection(connectionType);
 
-                Accommodation accomodation = GetAccomodation();
+                Accomodation accomodation = GetAccomodation();
 
-                if (accomodation.AccommodationId == accomodationID && accomodation.Password == password)
+                if (accomodation.AccomodationID == accomodationID && accomodation.Password == password)
                 {
                     return true;
                 }

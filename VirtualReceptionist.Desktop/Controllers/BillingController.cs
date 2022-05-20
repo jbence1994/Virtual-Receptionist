@@ -1,10 +1,10 @@
 ﻿using System.Data;
 using System.Collections.Generic;
 using virtual_receptionist.Repositories;
+using virtual_receptionist.Repositories.Models;
 using System;
 using virtual_receptionist.Controllers.Exceptions;
 using virtual_receptionist.Controllers.Validation;
-using VirtualReceptionist.Desktop.Models;
 
 namespace virtual_receptionist.Controllers
 {
@@ -66,7 +66,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (Booking booking in bookingNotPaid)
             {
-                bookingsToBill.Rows.Add(booking.Id, booking.Guest.Name, booking.Room.Number, booking.NumberOfGuests,
+                bookingsToBill.Rows.Add(booking.ID, booking.Guest.Name, booking.Room.Number, booking.NumberOfGuests,
                     booking.ArrivalDate, booking.DepartureDate);
             }
 
@@ -101,7 +101,7 @@ namespace virtual_receptionist.Controllers
 
             foreach (BillingItem billingItem in billingItems)
             {
-                billingItemsDataTable.Rows.Add(billingItem.Name, billingItem.Price, billingItem.Category.Vat,
+                billingItemsDataTable.Rows.Add(billingItem.Name, billingItem.Price, billingItem.Category.VAT,
                     billingItem.Category.Name, billingItem.Category.Unit);
             }
 
@@ -138,7 +138,7 @@ namespace virtual_receptionist.Controllers
         {
             Booking booking = new Booking()
             {
-                Id = Convert.ToInt32(bookingID)
+                ID = Convert.ToInt32(bookingID)
             };
 
             billingRepository.SetBookingAsPaid(booking);
