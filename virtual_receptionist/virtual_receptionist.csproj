@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C36EBE0F-791C-4574-9170-E1088411CD33}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>virtual_receptionist</RootNamespace>
+    <AssemblyName>virtual_receptionist</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604">
+      <HintPath>packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+      <HintPath>packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidAddressException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidBirthDateException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidBllingItemParameterException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidBookingParameterException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidFreeRoomCapacityException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidCitizenshipException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidCityException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidDocumentNumberException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidEmailAddressException.cs" />
+    <Compile Include="Controllers\Exceptions\FailedLoginException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidNameException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidPhoneNumberException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidVATNumberException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidZipCodeException.cs" />
+    <Compile Include="Controllers\Validation\AddressValidation.cs" />
+    <Compile Include="Controllers\Validation\BirthDateValidation.cs" />
+    <Compile Include="Controllers\Validation\BookingCapacityValidation.cs" />
+    <Compile Include="Controllers\Validation\BookingDateValidation.cs" />
+    <Compile Include="Controllers\Validation\CitizenshipValidation.cs" />
+    <Compile Include="Controllers\Validation\CityValidation.cs" />
+    <Compile Include="Controllers\Validation\DocumentNumberValidation.cs" />
+    <Compile Include="Controllers\Validation\EmailValidation.cs" />
+    <Compile Include="Controllers\Validation\BillingItemValidation.cs" />
+    <Compile Include="Controllers\Validation\FreeRoomCapacityValidaiton.cs" />
+    <Compile Include="Controllers\Validation\NameValidation.cs" />
+    <Compile Include="Controllers\Validation\PhoneNumberValidation.cs" />
+    <Compile Include="Controllers\Validation\VATNumberValidation.cs" />
+    <Compile Include="Controllers\Validation\BillingItemQuantityValidation.cs" />
+    <Compile Include="Controllers\Validation\ZipCodeValidation.cs" />
+    <Compile Include="Repositories\AccomodationRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\Models\Accomodation.cs" />
+    <Compile Include="Repositories\Models\BillingItemCategory.cs" />
+    <Compile Include="Repositories\DAO\IGenericDAO.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Repositories\BillingRepository.cs" />
+    <Compile Include="Repositories\BookingRepository.cs" />
+    <Compile Include="Repositories\GuestRepository.cs" />
+    <Compile Include="Repositories\MySQLConnection\Database.cs" />
+    <Compile Include="Repositories\MySQLConnection\InvalidConnectionTypeException.cs" />
+    <Compile Include="Views\FormAddBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormAddBooking.Designer.cs">
+      <DependentUpon>FormAddBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MainMenuController.cs" />
+    <Compile Include="Views\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Models\BillingItem.cs" />
+    <Compile Include="Repositories\Models\Country.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Views\FormBilling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormBilling.Designer.cs">
+      <DependentUpon>FormBilling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormGuestDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormGuestDatabase.Designer.cs">
+      <DependentUpon>FormGuestDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormMainMenu.Designer.cs">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormBillingItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormBillingItems.Designer.cs">
+      <DependentUpon>FormBillingItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormBooking.Designer.cs">
+      <DependentUpon>FormBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Models\Guest.cs" />
+    <Compile Include="Controllers\GuestDatabaseController.cs" />
+    <Compile Include="Controllers\Validation\InputValidation.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Models\Booking.cs" />
+    <Compile Include="Repositories\Models\Room.cs" />
+    <Compile Include="Views\FormUpdateBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormUpdateBooking.Designer.cs">
+      <DependentUpon>FormUpdateBooking.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\FormAddBooking.resx">
+      <DependentUpon>FormAddBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormBilling.resx">
+      <DependentUpon>FormBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormGuestDatabase.resx">
+      <DependentUpon>FormGuestDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormMainmenu.resx">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormBillingItems.resx">
+      <DependentUpon>FormBillingItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormBooking.resx">
+      <DependentUpon>FormBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\FormUpdateBooking.resx">
+      <DependentUpon>FormUpdateBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="SystemDesign\ControllerSystemDesign.cd" />
+    <None Include="SystemDesign\RepositorySystemDesign.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="SystemDesign\ViewSystemDesign.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repositories\MockData\accommodation.json" />
+    <Content Include="Repositories\MockData\billingItems.json" />
+    <Content Include="Repositories\MockData\bookings.json" />
+    <Content Include="Repositories\MockData\countries.json" />
+    <Content Include="Repositories\MockData\guests.json" />
+    <Content Include="Repositories\MockData\rooms.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
