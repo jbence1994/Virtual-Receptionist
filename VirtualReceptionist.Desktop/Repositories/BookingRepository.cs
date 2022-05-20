@@ -64,9 +64,9 @@ namespace VirtualReceptionist.Desktop.Repositories
             database.Dml(sql);
         }
 
-        public void Delete(int id)
+        public void Delete(Booking booking)
         {
-            var sql = $"DELETE FROM booking WHERE booking.ID = \"{id}\"";
+            var sql = $"DELETE FROM booking WHERE booking.ID = \"{booking.Id}\"";
             database.Dml(sql);
         }
 
