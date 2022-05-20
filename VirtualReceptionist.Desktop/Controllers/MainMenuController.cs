@@ -1,6 +1,6 @@
 ﻿using virtual_receptionist.Repositories;
 using virtual_receptionist.Views;
-using VirtualReceptionist.Desktop.Models;
+using virtual_receptionist.Repositories.Models;
 
 namespace virtual_receptionist.Controllers
 {
@@ -37,8 +37,8 @@ namespace virtual_receptionist.Controllers
         /// </summary>
         public string SetMainMenuHeader()
         {
-            Accommodation accomodation = repository.GetAccomodation();
-            return $"{accomodation.Name} ({accomodation.VatNumber})";
+            Accomodation accomodation = repository.GetAccomodation();
+            return $"{accomodation.AccomodationName} ({accomodation.VATNumber})";
         }
 
         /// <summary>
@@ -56,13 +56,13 @@ namespace virtual_receptionist.Controllers
         /// <returns>A feltöltött sztring tömböt adja vissza a függvény</returns>
         public string[] GetAccomodationInfo()
         {
-            Accommodation accomodation = repository.GetAccomodation();
+            Accomodation accomodation = repository.GetAccomodation();
 
             string[] accomodationData = new string[8];
-            accomodationData[0] = accomodation.Name;
+            accomodationData[0] = accomodation.AccomodationName;
             accomodationData[1] = accomodation.CompanyName;
             accomodationData[2] = accomodation.Contact;
-            accomodationData[3] = accomodation.VatNumber;
+            accomodationData[3] = accomodation.VATNumber;
             accomodationData[4] = accomodation.Headquarters;
             accomodationData[5] = accomodation.Site;
             accomodationData[6] = accomodation.PhoneNumber;
